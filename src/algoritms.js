@@ -29,46 +29,33 @@ function when_construct(ListIndices, ListValor, tipo) {
 function where_construct(ListValor, indice) {
     let where = "";
     if (ListValor != null) {
-        // Si el valor del req.name tiene varios valores los pone en un array
-        // palabra por palabra
+        // Si el valor del req tiene varios valores los pone en un array
+        // valor por valor del array (quitandole la coma)
         let valores = ListValor.split(",");
         // Se limpia los espacios de cada valor
         for (let i = 0; i < valores.length; i++) valores[i] = valores[i].trim();
-        // Se verifica si el indice que se paso es exactamente el de indice name
-        if (indice === indice_name) {
+
             // Se declara el tamaño del array para pasarlo por el for
             let tam = valores.length;
             for (let i = 0; i < tam; i++) {
                 // cada valor del array se le pone en una variable
                 let noms = valores[i].split(" ");
                 switch (noms.length) {
+
+                    //caso 1: cuando solo tiene 1 valor
                     case 1:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
                             let noms = valores[i].split(" ");
                             noms[0] = noms[0].toUpperCase();
-                            if (noms.length === 2) {
-                                noms[1] = noms[1].toUpperCase();
-                                where =
-                                    where +
-                                    indice +
-                                    " SIMILAR TO '%" +
-                                    noms[0] +
-                                    "%" +
-                                    noms[1] +
-                                    "%' OR " +
-                                    indice +
-                                    " SIMILAR TO '%" +
-                                    noms[1] +
-                                    "%" +
-                                    noms[0] +
-                                    "%' OR ";
-                            } else
+                            
                                 where = where + indice + " SIMILAR TO '%" + noms[0] + "%' OR ";
                         }
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 2: cuando solo tiene 2 valores
                     case 2:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -96,6 +83,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 3: cuando solo tiene 3 valores
                     case 3:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -125,6 +114,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+                    
+                    //caso 4: cuando solo tiene 4 valores
                     case 4:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -159,6 +150,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 5: cuando solo tiene 5 valores
                     case 5:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -198,6 +191,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 6: cuando solo tiene 6 valores
                     case 6:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -242,6 +237,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 7: cuando solo tiene 7 valores
                     case 7:
                         where = "( ";
                         for (let i = 0; i < valores.length; i++) {
@@ -291,6 +288,8 @@ function where_construct(ListValor, indice) {
                         where = where.slice(0, -3);
                         where = where + ")";
                         return where;
+
+                    //caso 8: cuando solo tiene 8 valores
                     case 8:
                         noms[0] = noms[0].toUpperCase();
                         noms[1] = noms[1].toUpperCase();
@@ -312,7 +311,7 @@ function where_construct(ListValor, indice) {
                         );
                 }
             }
-        }
+
         let valorcomillas = "";
         for (let i = 0; i < valores.length; i++)
             valorcomillas = valorcomillas + "'" + valores[i] + "',";
