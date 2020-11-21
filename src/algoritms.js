@@ -335,12 +335,22 @@ function getComplet(req, res, next) {
     let FPeriod = "'" + jsonR.periodoF + "'";
     let ListDNI = jsonR.dni;
     let ListCodigo = jsonR.codigo;
+    // let Validado = jsonR.validado;
+
+    let Validado = jsonR.validado;
+    let ValidadoTrue = "";
+    // let ValidadoTrue = "AND validado = "+Validado;
     let hoy = new Date();
     if (ListNames === "") ListNames = null;
     if (ListConcepts === "") ListConcepts = null;
     if (Listvoucher === "") Listvoucher = null;
     if (ListDNI === "") ListDNI = null;
     if (ListCodigo === "") ListCodigo = null;
+
+    if(Validado === true){       
+        ValidadoTrue = "AND validado = "+Validado;
+    } 
+    
     if (jsonR.periodoI === null || jsonR.periodoI === "")
         IPeriod = "'0001-01-01'";
     if (jsonR.periodoF === null || jsonR.periodoF === "")
@@ -400,7 +410,7 @@ function getComplet(req, res, next) {
         where_construct(ListDNI, indice_dnim) +
         " AND " +
         where_construct(ListCodigo, indice_codigom) +
-        " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') ";
+        " AND clase_pagos.id_clase_pagos IN (select id_clase_pagos from configuracion where estado = 'S') "+ValidadoTrue;
 
     console.log(where);
     q.SelectCollection(req, res, next, where);
