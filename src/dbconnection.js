@@ -5,7 +5,7 @@ let options = {
 
 let pgp = require('pg-promise')(options);
 
-const  urlconnection = 'postgres://modulo4:modulo4@67.205.143.180:5432/tcs7';
+const  urlconnection = 'postgres://modulo4:modulo4@161.35.60.197:5432/tcs7';
 
 let cn = pgp(urlconnection);
 
